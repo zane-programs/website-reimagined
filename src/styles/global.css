@@ -1,0 +1,10 @@
+html,
+body {
+  background-color: #edf2f7;
+}
+
+html,
+body,
+a {
+  cursor: none;
+}
