@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export default function Cursor() {
   const [mouseX, setMouseX] = useState<number | null>(null);
@@ -7,6 +7,12 @@ export default function Cursor() {
 
   const [mouseInWindow, setMouseInWindow] = useState(false);
   const [mouseDown, setMouseDown] = useState(false);
+
+  // whether or not there is mouse support
+  const mouseAvailable = useMemo(
+    () => window.matchMedia("(pointer:fine)").matches,
+    []
+  );
 
   useEffect(() => {
     const handleMouseMove = (e: any) => {
@@ -33,7 +39,10 @@ export default function Cursor() {
       window.removeEventListener("mouseup", handleMouseUp);
     };
   }, [setMouseX, setMouseX, setMouseInWindow, setMouseDown]);
-  return mouseX !== null && mouseY !== null && mouseInWindow ? (
+  return mouseAvailable &&
+    mouseX !== null &&
+    mouseY !== null &&
+    mouseInWindow ? (
     <CursorElement
       style={{
         transform: `translate(${mouseX - 15}px,${mouseY - 15}px)`,
