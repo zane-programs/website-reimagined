@@ -13,7 +13,9 @@ export default function Layout({
   return (
     <>
       <Navbar />
-      <Box backgroundColor="gray.100">{children}</Box>
+      <Box backgroundColor="gray.100" p="3">
+        {children}
+      </Box>
     </>
   );
 }

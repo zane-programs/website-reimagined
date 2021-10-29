@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Cursor() {
   const [mouseX, setMouseX] = useState<number | null>(null);
@@ -9,21 +9,30 @@ export default function Cursor() {
   const [mouseDown, setMouseDown] = useState(false);
 
   // whether or not there is mouse support
-  const mouseAvailable = useMemo(
-    () => window.matchMedia("(pointer:fine)").matches,
-    []
-  );
+  // const mouseAvailable = useMemo(
+  //   () => window.matchMedia("(pointer:fine)").matches,
+  //   []
+  // );
+
+  const [mouseAvailable, setMouseAvailable] = useState(false);
 
   useEffect(() => {
+    // set mouse availability
+    setMouseAvailable(window.matchMedia("(pointer:fine)").matches);
+
+    // callback for handling mouse motion
     const handleMouseMove = (e: any) => {
       setMouseX(e.clientX);
       setMouseY(e.clientY);
     };
+
+    // callbacks for handling mouse entry/exit
     const handleMouseOver = () => setMouseInWindow(true);
     const handleMouseOut = () => setMouseInWindow(false);
     const handleMouseDown = () => setMouseDown(true);
     const handleMouseUp = () => setMouseDown(false);
 
+    // add listeners
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseover", handleMouseOver);
     window.addEventListener("mouseout", handleMouseOut);
@@ -32,6 +41,7 @@ export default function Cursor() {
 
     // cleanup
     return () => {
+      // remove listeners on unmount
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseover", handleMouseOver);
       window.removeEventListener("mouseout", handleMouseOut);

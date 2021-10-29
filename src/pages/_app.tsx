@@ -6,7 +6,7 @@ import Layout from "../components/Layout";
 import Cursor from "../components/Cursor";
 
 // hooks
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 
 // util
@@ -22,27 +22,30 @@ function MyApp({ Component, pageProps }) {
   const { events: routerEvents } = useRouter();
 
   useEffect(() => {
+    // start/stop NProgress
     const handleStart = () => NProgress.start();
     const handleComplete = () => NProgress.done();
 
+    // add listeners
     routerEvents.on("routeChangeStart", handleStart);
     routerEvents.on("routeChangeComplete", handleComplete);
     routerEvents.on("routeChangeError", handleComplete);
 
     // cleanup
     return () => {
+      // remove on unmount
       routerEvents.off("routeChangeStart", handleStart);
       routerEvents.off("routeChangeComplete", handleComplete);
       routerEvents.off("routeChangeError", handleComplete);
     };
   }, [routerEvents]);
 
-  // page title if applicable
-  const { title } = Component;
+  // page title (if applicable)
+  const title = useMemo(() => Component.title, [Component]);
 
   return (
     <ChakraProvider>
-      <Cursor />
+      {/* <Cursor /> */}
       <Layout>
         <Head>
           <title>
