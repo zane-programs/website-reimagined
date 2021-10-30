@@ -1,6 +1,6 @@
 import { Heading } from "@chakra-ui/react";
 
-export default function About() {
+export default function Projects() {
   return (
     <>
       <Heading pb="2">Projects</Heading>
@@ -10,4 +10,4 @@ export default function About() {
 }
 
 // page title
-About.title = "About";
+Projects.title = "Projects";
