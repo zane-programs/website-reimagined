@@ -3,7 +3,6 @@ import { ChakraProvider } from "@chakra-ui/react";
 // components
 import Head from "next/head";
 import Layout from "../components/Layout";
-import Cursor from "../components/Cursor";
 
 // hooks
 import { useEffect, useMemo } from "react";
@@ -12,9 +11,13 @@ import { useRouter } from "next/router";
 // util
 import NProgress from "nprogress";
 
+// theme
+import theme from "../config/theme";
+
 // styles
-import "../styles/global.css";
-import "../styles/nprogress.css";
+import "focus-visible/dist/focus-visible"; // focus-visible polyfill
+import "../styles/global.css"; // global styles
+import "../styles/nprogress.css"; // custom nprogress styling
 
 NProgress.configure({ showSpinner: false });
 
@@ -44,8 +47,7 @@ function MyApp({ Component, pageProps }) {
   const title = useMemo(() => Component.title, [Component]);
 
   return (
-    <ChakraProvider>
-      {/* <Cursor /> */}
+    <ChakraProvider theme={theme}>
       <Layout>
         <Head>
           <title>

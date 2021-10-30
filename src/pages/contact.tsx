@@ -3,7 +3,7 @@ import { Heading } from "@chakra-ui/react";
 export default function Contact() {
   return (
     <>
-      <Heading>Contact</Heading>
+      <Heading pb="2">Contact</Heading>
       <p>Contact me here</p>
     </>
   );

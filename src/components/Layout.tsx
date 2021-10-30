@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Grid } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
 // components
@@ -11,11 +11,16 @@ export default function Layout({
   title?: string;
 }) {
   return (
-    <>
+    <Grid
+      w="100vw"
+      h="100vh"
+      templateRows="1fr"
+      templateColumns="250px 1fr"
+    >
       <Navbar />
-      <Box backgroundColor="gray.100" p="3">
+      <Box backgroundColor="gray.100" p="4">
         {children}
       </Box>
-    </>
+    </Grid>
   );
 }
