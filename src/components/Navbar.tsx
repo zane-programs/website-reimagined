@@ -84,6 +84,7 @@ function ProfileLinks({
           const { icon, url, title } = links[key];
           return (
             <ChakraLink
+              key={key}
               href={url}
               title={title}
               aria-label="title"

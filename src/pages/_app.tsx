@@ -8,6 +8,9 @@ import Layout from "../components/Layout";
 import { useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 
+// scripts
+import Script from "next/script";
+
 // util
 import NProgress from "nprogress";
 
@@ -54,6 +57,18 @@ function MyApp({ Component, pageProps }) {
             Zane St. John
             {title ? " - " + title : ""}
           </title>
+          {/* analytics only for production */}
+          {process.env.NODE_ENV === "development" ? null : (
+            <>
+              <Script
+                async
+                src="https://www.googletagmanager.com/gtag/js?id=G-6DNKEDXG5C"
+              />
+              <Script id="initAnalytics">
+                {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-6DNKEDXG5C");`}
+              </Script>
+            </>
+          )}
         </Head>
         <Component {...pageProps} />
       </Layout>

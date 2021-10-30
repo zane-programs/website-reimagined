@@ -21,20 +21,6 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
             rel="stylesheet"
           />
-          {/* analytics only for production */}
-          {process.env.NODE_ENV === "development" ? null : (
-            <>
-              <script
-                async
-                src="https://www.googletagmanager.com/gtag/js?id=G-6DNKEDXG5C"
-              />
-              <script
-                dangerouslySetInnerHTML={{
-                  __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-6DNKEDXG5C");`,
-                }}
-              />
-            </>
-          )}
         </Head>
         <body>
           <Main />
