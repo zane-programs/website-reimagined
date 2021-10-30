@@ -78,7 +78,7 @@ function ProfileLinks({
   const [hoveredItemKey, setHoveredItemKey] = useState<string | null>(null);
 
   return (
-    <Box pt="3">
+    <Box pt="4">
       <Center>
         {Object.keys(links).map((key, index) => {
           const { icon, url, title } = links[key];
