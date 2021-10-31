@@ -2,8 +2,15 @@ import { extendTheme } from "@chakra-ui/react";
 
 const theme = extendTheme({
   fonts: {
-    heading: "Inter",
-    body: "Inter",
+    heading: "'Epilogue', sans-serif",
+    body: "'Inter', sans-serif",
+  },
+  components: {
+    Link: {
+      baseStyle: {
+        color: "blue.400",
+      },
+    },
   },
 });
 

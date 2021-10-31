@@ -1,10 +1,10 @@
-import { Heading } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
 
 export default function Contact() {
   return (
     <>
       <Heading pb="2">Contact</Heading>
-      <p>Contact me here</p>
+      <Text>Contact me here</Text>
     </>
   );
 }

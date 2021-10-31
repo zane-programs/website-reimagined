@@ -9,12 +9,13 @@ import {
 } from "react";
 
 // components
-import { Box, Center, Grid, Link as ChakraLink } from "@chakra-ui/react";
-import Link from "next/link";
+import { Box, Center, Grid, Link } from "@chakra-ui/react";
+import NextLink from "next/link";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 // hooks
 import { useRouter } from "next/router";
+import useMouse from "../hooks/useMouse";
 
 // styling
 import styled from "styled-components";
@@ -30,7 +31,7 @@ const NavbarItemsContext = createContext({} as NavbarItemsContextInterface);
 
 export default function Navbar() {
   return (
-    <Box as="nav" w="100%" h="100%" bg="gray.900" position="relative">
+    <Box as="nav" w="250px" h="100vh" bg="gray.900">
       <Grid w="100%" h="100%" templateRows="auto 1fr" templateColumns="1fr">
         <LogoArea />
         <NavItems />
@@ -42,11 +43,11 @@ export default function Navbar() {
 const LogoArea = memo(function LogoArea() {
   return (
     <Box p="3">
-      <ChakraLink as={Link} href="/">
-        <a>
+      <NextLink href="/" passHref>
+        <Link>
           <LogoText>Zane St. John</LogoText>
-        </a>
-      </ChakraLink>
+        </Link>
+      </NextLink>
       <ProfileLinks
         links={{
           github: {
@@ -76,6 +77,8 @@ function ProfileLinks({
   links: { [key: string]: { icon: ReactNode; url: string; title: string } };
 }) {
   const [hoveredItemKey, setHoveredItemKey] = useState<string | null>(null);
+  // check for mouse availability
+  const { mouseAvailable } = useMouse();
 
   return (
     <Box pt="4">
@@ -83,23 +86,27 @@ function ProfileLinks({
         {Object.keys(links).map((key, index) => {
           const { icon, url, title } = links[key];
           return (
-            <ChakraLink
+            <Link
               key={key}
               href={url}
               title={title}
               aria-label="title"
               color="#fff"
-              fontSize="20px"
+              fontSize="24px"
               opacity={
-                hoveredItemKey === null ? 1 : hoveredItemKey === key ? 1 : 0.75
+                !mouseAvailable ||
+                hoveredItemKey === null ||
+                hoveredItemKey === key
+                  ? 1
+                  : 0.75
               }
-              marginRight={index + 1 === Object.keys(links).length ? 0 : "10px"}
+              marginRight={index + 1 === Object.keys(links).length ? 0 : "13px"}
               onMouseOver={() => setHoveredItemKey(key)}
               onMouseOut={() => setHoveredItemKey(null)}
               isExternal
             >
               {icon}
-            </ChakraLink>
+            </Link>
           );
         })}
       </Center>
@@ -126,16 +133,16 @@ const NavItems = memo(function NavItems() {
 function NavbarItem({ name, path }: { name: string; path: string }) {
   const { pathname } = useRouter();
   const { hoveredItemKey, setHoveredItemKey } = useContext(NavbarItemsContext);
+  // check for mouse availability
+  const { mouseAvailable } = useMouse();
 
   return (
     <li>
-      <ChakraLink as={Link} href={path}>
-        <a
-          style={{
-            display: "inline-block",
-            padding: "15px 12px 15px 12px",
-            width: "100%",
-          }}
+      <NextLink href={path} passHref>
+        <Link
+          display="inline-block"
+          padding="15px 12px 15px 12px"
+          width="100%"
           onMouseOver={() => setHoveredItemKey(path)}
           onMouseOut={() => setHoveredItemKey(null)}
         >
@@ -143,9 +150,9 @@ function NavbarItem({ name, path }: { name: string; path: string }) {
             style={{
               // TODO: clean this up a bit
               opacity:
-                hoveredItemKey === null
-                  ? 1
-                  : hoveredItemKey === path
+                !mouseAvailable ||
+                hoveredItemKey === null ||
+                hoveredItemKey === path
                   ? 1
                   : 0.75,
             }}
@@ -180,8 +187,8 @@ function NavbarItem({ name, path }: { name: string; path: string }) {
               </Box>
             </Box>
           </NavbarLinkInternal>
-        </a>
-      </ChakraLink>
+        </Link>
+      </NextLink>
     </li>
   );
 }
@@ -196,6 +203,7 @@ const LogoText = styled(Box)`
 
   font-weight: 600;
   font-size: 27px;
+  font-family: 'Epilogue', sans-serif;
   text-align: center;
   color: #fff;
 
