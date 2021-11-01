@@ -17,9 +17,6 @@ import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { useRouter } from "next/router";
 import useMouse from "../hooks/useMouse";
 
-// styling
-import styled from "styled-components";
-
 // info
 import navItems from "../config/navItems";
 
@@ -193,50 +190,54 @@ function NavbarItem({ name, path }: { name: string; path: string }) {
   );
 }
 
-const NavbarLinkInternal = styled.div`
-  transition: all 150ms ease;
-  display: inline-block;
-`;
+function NavbarLinkInternal({ children }: { children: React.ReactChild }) {
+  return (
+    <Box display="inline-block" transition="all 150ms ease">
+      {children}
+    </Box>
+  );
+}
 
-const LogoText = styled(Box)`
-  user-select: none;
-
-  font-weight: 600;
-  font-size: 27px;
-  font-family: "Epilogue", sans-serif;
-  text-align: center;
-  color: #fff;
-
-  display: inline-block;
-  margin: 0;
-  padding: 0;
-  padding: 5px;
-  transition: color 250ms cubic-bezier(0, 1, 1, 1);
-
-  position: relative;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-
-  &::after {
-    width: 100%;
-    height: 2px;
-
-    border-radius: 2px;
-    content: "";
-    background-color: #fff;
-    display: block;
-
-    position: absolute;
-    bottom: 3px;
-    left: 0;
-    transform: scaleX(0);
-
-    transition: transform 250ms cubic-bezier(0, 1, 1, 1);
-    transform-origin: 100% 0px;
-  }
-  &:hover::after {
-    transform: scaleX(1);
-    transform-origin: 0px 0px !important;
-  }
-`;
+// TODO: clean this component up a bit
+function LogoText({ children }: { children: React.ReactChild }) {
+  return (
+    <Box
+      userSelect="none"
+      fontWeight="700"
+      fontSize="27px"
+      fontFamily="'Epilogue', sans-serif"
+      textAlign="center"
+      color="#fff"
+      display="inline-block"
+      margin={0}
+      padding={0}
+      transition="color 250ms cubic-bezier(0, 1, 1, 1)"
+      position="relative"
+      top="0"
+      left="50%"
+      transform="translateX(-50%)"
+      _after={{
+        content: "''",
+        width: "100%",
+        height: "2px",
+        borderRadius: "2px",
+        backgroundColor: "#fff",
+        display: "block",
+        position: "absolute",
+        bottom: "3px",
+        left: 0,
+        transform: "scaleX(0)",
+        transition: "transform 250ms cubic-bezier(0, 1, 1, 1)",
+        transformOrigin: "100% 0px",
+      }}
+      _hover={{
+        _after: {
+          transform: "scaleX(1)",
+          transformOrigin: "0px 0px",
+        },
+      }}
+    >
+      {children}
+    </Box>
+  );
+}
