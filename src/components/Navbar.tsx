@@ -1,4 +1,4 @@
-import {
+import React, {
   createContext,
   memo,
   useContext,
@@ -16,6 +16,9 @@ import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 // hooks
 import { useRouter } from "next/router";
 import useMouse from "../hooks/useMouse";
+
+// types
+import { ChakraProps } from "@chakra-ui/system";
 
 // info
 import navItems from "../config/navItems";
@@ -190,16 +193,22 @@ function NavbarItem({ name, path }: { name: string; path: string }) {
   );
 }
 
-function NavbarLinkInternal({ children }: { children: React.ReactChild }) {
+function NavbarLinkInternal({
+  children,
+  ...props
+}: React.PropsWithChildren<ChakraProps>) {
   return (
-    <Box display="inline-block" transition="all 150ms ease">
+    <Box display="inline-block" transition="all 150ms ease" {...props}>
       {children}
     </Box>
   );
 }
 
 // TODO: clean this component up a bit
-function LogoText({ children }: { children: React.ReactChild }) {
+function LogoText({
+  children,
+  ...props
+}: React.PropsWithChildren<ChakraProps>) {
   return (
     <Box
       userSelect="none"
@@ -236,6 +245,7 @@ function LogoText({ children }: { children: React.ReactChild }) {
           transformOrigin: "0px 0px",
         },
       }}
+      {...props}
     >
       {children}
     </Box>
