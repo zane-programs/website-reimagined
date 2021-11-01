@@ -90,7 +90,7 @@ function ProfileLinks({
               key={key}
               href={url}
               title={title}
-              aria-label="title"
+              aria-label={title}
               color="#fff"
               fontSize="24px"
               opacity={
