@@ -203,7 +203,7 @@ const LogoText = styled(Box)`
 
   font-weight: 600;
   font-size: 27px;
-  font-family: 'Epilogue', sans-serif;
+  font-family: "Epilogue", sans-serif;
   text-align: center;
   color: #fff;
 
