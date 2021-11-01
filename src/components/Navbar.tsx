@@ -18,7 +18,7 @@ import { useRouter } from "next/router";
 import useMouse from "../hooks/useMouse";
 
 // types
-import { ChakraProps } from "@chakra-ui/system";
+import { HTMLChakraProps } from "@chakra-ui/system";
 
 // info
 import navItems from "../config/navItems";
@@ -196,7 +196,7 @@ function NavbarItem({ name, path }: { name: string; path: string }) {
 function NavbarLinkInternal({
   children,
   ...props
-}: React.PropsWithChildren<ChakraProps>) {
+}: React.PropsWithChildren<HTMLChakraProps<"div">>) {
   return (
     <Box display="inline-block" transition="all 150ms ease" {...props}>
       {children}
@@ -208,7 +208,7 @@ function NavbarLinkInternal({
 function LogoText({
   children,
   ...props
-}: React.PropsWithChildren<ChakraProps>) {
+}: React.PropsWithChildren<HTMLChakraProps<"div">>) {
   return (
     <Box
       userSelect="none"
