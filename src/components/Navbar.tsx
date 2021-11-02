@@ -105,7 +105,7 @@ function ProfileLinks({
                 hoveredItemKey === null ||
                 hoveredItemKey === key
                   ? 1
-                  : 0.75
+                  : 0.68
               }
               marginRight={index + 1 === Object.keys(links).length ? 0 : "13px"}
               onMouseOver={() => setHoveredItemKey(key)}
@@ -161,7 +161,7 @@ function NavbarItem({ name, path }: { name: string; path: string }) {
                 hoveredItemKey === null ||
                 hoveredItemKey === path
                   ? 1
-                  : 0.75,
+                  : 0.68,
             }}
           >
             <Box
