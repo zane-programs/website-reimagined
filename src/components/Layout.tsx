@@ -1,21 +1,22 @@
-import { Box, Grid } from "@chakra-ui/react";
-import { ReactNode, useEffect, useState } from "react";
-
 // components
+import { Box } from "@chakra-ui/react";
 import Navbar from "./Navbar";
+
+// config
+import config from "../config";
 
 export default function Layout({
   children,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
   title?: string;
 }) {
   return (
-    <Grid w="100vw" h="100vh" templateRows="1fr" templateColumns="250px 1fr">
+    <Box>
       <Navbar />
-      <Box backgroundColor="gray.100" p="4" height="100vh" overflow="scroll">
-          {children}
+      <Box backgroundColor="gray.100" p="4" ml={config.navbarWidth}>
+        {children}
       </Box>
-    </Grid>
+    </Box>
   );
 }

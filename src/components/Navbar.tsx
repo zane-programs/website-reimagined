@@ -20,7 +20,8 @@ import useMouse from "../hooks/useMouse";
 // types
 import { HTMLChakraProps } from "@chakra-ui/system";
 
-// info
+// config
+import config from "../config";
 import navItems from "../config/navItems";
 import packageJSON from "../../package.json";
 
@@ -32,7 +33,13 @@ const NavbarItemsContext = createContext({} as NavbarItemsContextInterface);
 
 export default function Navbar() {
   return (
-    <Box as="nav" w="250px" h="100vh" bg="gray.900">
+    <Box
+      as="nav"
+      w={config.navbarWidth}
+      h="100vh"
+      bg="gray.900"
+      position="fixed"
+    >
       <Grid
         w="100%"
         h="100%"
