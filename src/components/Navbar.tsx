@@ -22,6 +22,7 @@ import { HTMLChakraProps } from "@chakra-ui/system";
 
 // info
 import navItems from "../config/navItems";
+import packageJSON from "../../package.json";
 
 interface NavbarItemsContextInterface {
   hoveredItemKey: string | null;
@@ -32,9 +33,15 @@ const NavbarItemsContext = createContext({} as NavbarItemsContextInterface);
 export default function Navbar() {
   return (
     <Box as="nav" w="250px" h="100vh" bg="gray.900">
-      <Grid w="100%" h="100%" templateRows="auto 1fr" templateColumns="1fr">
+      <Grid
+        w="100%"
+        h="100%"
+        templateRows="auto 1fr auto"
+        templateColumns="1fr"
+      >
         <LogoArea />
         <NavItems />
+        <BottomInfo />
       </Grid>
     </Box>
   );
@@ -251,3 +258,21 @@ function LogoText({
     </Box>
   );
 }
+
+const BottomInfo = memo(function BottomInfo() {
+  return (
+    <Box padding="4">
+      <Center>
+        <Link
+          href="https://github.com/zane-programs/website-reimagined"
+          color="#fff"
+          opacity={0.68}
+          _hover={{ opacity: 1 }}
+          isExternal
+        >
+          v{packageJSON.version}
+        </Link>
+      </Center>
+    </Box>
+  );
+});
