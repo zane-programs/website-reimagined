@@ -1,5 +1,5 @@
 // components
-import { Box, Grid, Heading, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 
 // util
@@ -35,22 +35,33 @@ function ProjectCard({ project }: { project: Project }) {
   return (
     <NextLink href={`/projects/${project.slug}`}>
       <a>
-        <Box background="gray.900" height="200px" borderRadius="18px">
-          <Grid w="100%" h="100%" templateRows="1fr auto" templateColumns="1fr">
-            <Box
-              backgroundImage={`url(${project.bannerImage[0].url})`}
-              backgroundRepeat="no-repeat"
-              backgroundPosition="center"
-              backgroundSize="cover"
-              borderTopRadius="18px"
-            ></Box>
-            <Box color="#fff" p="4">
-              <Heading as="p" textAlign="left" fontSize="1.6em">
-                {project.page}
-              </Heading>
-              <Text>{project.description}</Text>
-            </Box>
-          </Grid>
+        <Box height="200px" position="relative">
+          <Box
+            backgroundImage={`url(${project.bannerImage[0].url})`}
+            backgroundRepeat="no-repeat"
+            backgroundPosition="center"
+            backgroundSize="cover"
+            borderRadius="18px"
+            w="100%"
+            h="100%"
+          ></Box>
+          <Box
+            position="absolute"
+            bottom="0"
+            left="0"
+            width="100%"
+            height="auto"
+            background="rgba(25, 25, 35, 0.78)"
+            backdropFilter="blur(2px)"
+            borderBottomRadius="18px"
+            color="#fff"
+            p="4"
+          >
+            <Heading as="p" textAlign="left" fontSize="1.6em">
+              {project.page}
+            </Heading>
+            <Text>{project.description}</Text>
+          </Box>
         </Box>
       </a>
     </NextLink>
