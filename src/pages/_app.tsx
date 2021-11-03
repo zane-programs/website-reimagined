@@ -19,8 +19,11 @@ import theme from "../config/theme";
 
 // styles
 import "focus-visible/dist/focus-visible"; // focus-visible polyfill
+import "react-notion/src/styles.css"; // notion base styles
 import "../styles/global.css"; // global styles
 import "../styles/nprogress.css"; // custom nprogress styling
+import "../styles/notion-customization.css"; // custom styles for notion
+
 
 NProgress.configure({ showSpinner: false });
 

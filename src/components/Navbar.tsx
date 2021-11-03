@@ -6,6 +6,7 @@ import React, {
   Dispatch,
   ReactNode,
   SetStateAction,
+  useMemo,
 } from "react";
 
 // components
@@ -39,6 +40,8 @@ export default function Navbar() {
       h="100vh"
       bg="gray.900"
       position="fixed"
+      // navbar shouldn't be selectable
+      userSelect="none"
     >
       <Grid
         w="100%"
@@ -150,6 +153,12 @@ function NavbarItem({ name, path }: { name: string; path: string }) {
   // check for mouse availability
   const { mouseAvailable } = useMouse();
 
+  // whether or not pathname link is in view
+  const itemInView = useMemo(
+    () => pathname === path || pathname.startsWith(path + "/"),
+    [pathname, path]
+  );
+
   return (
     <li>
       <NextLink href={path} passHref>
@@ -192,7 +201,7 @@ function NavbarItem({ name, path }: { name: string; path: string }) {
                   background: "#fff",
                   display: "block",
                   borderRadius: "1px",
-                  transform: `scaleX(${pathname === path ? 1 : 0})`,
+                  transform: `scaleX(${itemInView ? 1 : 0})`,
                   transformOrigin: "0px 0px",
                   transition: "transform 250ms cubic-bezier(0, 1, 1, 1)",
                 }}

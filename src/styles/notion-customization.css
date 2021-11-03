@@ -1,0 +1,32 @@
+.notion-h1,
+.notion-h2,
+.notion-h3 {
+  font-family: "Epilogue", sans-serif;
+  font-weight: 700;
+  color: var(--chakra-colors-gray-800);
+}
+
+.notion-h1 {
+  font-size: var(--chakra-fontSizes-4xl);
+}
+
+.notion-h2 {
+  font-size: var(--chakra-fontSizes-2xl);
+}
+
+.notion-h3 {
+  font-size: var(--chakra-fontSizes-xl);
+}
+
+.notion-link {
+  color: var(--chakra-colors-blue-400);
+  text-decoration: none;
+}
+
+.notion-link:hover {
+  text-decoration: underline;
+}
+
+.notion-text {
+  font-family: "Inter", sans-serif;
+}
