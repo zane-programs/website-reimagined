@@ -1,4 +1,5 @@
 // components
+import { Link } from "@chakra-ui/layout";
 import Custom404 from "../404"; // 404 page
 
 // util
@@ -24,8 +25,16 @@ export default function ProjectPage({ blockMap, notFound }: ProjectPageProps) {
   return notFound ? (
     <Custom404 />
   ) : (
-    // <ReactMarkdown components={ChakraUIRenderer()}>{content}</ReactMarkdown>
-    <NotionRenderer blockMap={blockMap} />
+    <NotionRenderer
+      blockMap={blockMap}
+      customDecoratorComponents={{
+        a: ({ decoratorValue, children }) => (
+          <Link href={decoratorValue} isExternal>
+            {children}
+          </Link>
+        ),
+      }}
+    />
   );
 }
 
